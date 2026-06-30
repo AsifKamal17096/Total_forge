@@ -25,10 +25,10 @@ const values = [
 function About() {
   return (
     <motion.main
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <PageSeo
         title="About"
@@ -40,7 +40,7 @@ function About() {
         <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-end">
           <motion.div variants={revealItem} className="space-y-6">
             <p className="accent-text text-xs uppercase tracking-[0.35em]">Our Story</p>
-            <h1 className="font-heading text-5xl font-bold tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+            <h1 className="font-heading text-3xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-7xl">
               Ideas become durable digital products when the process is intentional.
             </h1>
           </motion.div>

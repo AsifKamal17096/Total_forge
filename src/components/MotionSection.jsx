@@ -9,7 +9,7 @@ function MotionSection({ children, className = '', id }) {
       variants={revealContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.18 }}
+      viewport={{ once: true, amount: 0.08 }}
     >
       {children}
     </motion.section>

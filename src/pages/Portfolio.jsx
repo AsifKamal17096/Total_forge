@@ -63,10 +63,10 @@ function Portfolio() {
 
   return (
     <motion.main
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <PageSeo
         title="Portfolio"
@@ -78,7 +78,7 @@ function Portfolio() {
         <div className="mx-auto w-full max-w-7xl">
           <motion.div variants={revealItem} className="max-w-3xl">
             <p className="accent-text text-xs uppercase tracking-[0.35em]">Portfolio</p>
-            <h1 className="mt-4 font-heading text-5xl font-bold tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 font-heading text-3xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-7xl">
               Twelve forged projects across four disciplines.
             </h1>
             <p className="mt-5 text-base leading-8 text-[color:var(--muted)]">
@@ -97,7 +97,7 @@ function Portfolio() {
                 key={filter}
                 type="button"
                 onClick={() => handleFilterChange(filter)}
-                className={`surface-hover rounded-full px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] transition duration-300 ${
+                className={`surface-hover rounded-full px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] transition duration-300 sm:px-4 sm:py-3 sm:text-sm sm:tracking-[0.22em] ${
                   activeFilter === filter
                     ? 'accent-solid'
                     : 'bg-[color:var(--surface)] text-[color:var(--muted)] hover:text-[color:var(--text)]'
@@ -111,11 +111,11 @@ function Portfolio() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFilter}
-              className="masonry-grid mt-8"
-              initial={{ opacity: 0, y: 24 }}
+              className="portfolio-grid mt-8"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -24 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} onOpen={setSelectedProject} />

@@ -16,10 +16,10 @@ const serviceIcons = {
 function Services() {
   return (
     <motion.main
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <PageSeo
         title="Services"
@@ -43,7 +43,7 @@ function Services() {
                 </div>
                 <div>
                   <p className="accent-text text-xs uppercase tracking-[0.35em]">Service</p>
-                  <h1 className="mt-4 font-heading text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+                  <h1 className="mt-4 font-heading text-3xl font-bold tracking-[-0.05em] sm:text-4xl lg:text-6xl">
                     {service.title}
                   </h1>
                 </div>

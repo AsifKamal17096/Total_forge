@@ -27,10 +27,10 @@ const featuredProjects = projects.filter((project) => project.featured).slice(0,
 function Home() {
   return (
     <motion.main
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <PageSeo
         title="Home"
@@ -38,34 +38,28 @@ function Home() {
         image="https://picsum.photos/seed/totalforge-home/1200/630"
       />
 
-      <MotionSection className="section-shell flex items-center" id="top">
+      <MotionSection className="section-shell flex items-center pt-24 sm:pt-28" id="top">
         <div className="grid-overlay absolute inset-0 opacity-70" />
-        <motion.div
-          className="mesh-orb left-[8%] top-28 h-44 w-44"
-          animate={{ x: [0, 26, -12, 0], y: [0, -18, 16, 0], scale: [1, 1.15, 0.92, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        <div className="mesh-orb left-[8%] top-28 h-32 w-32 sm:h-44 sm:w-44" />
+        <div
+          className="mesh-orb right-[10%] top-1/3 h-48 w-48 sm:h-72 sm:w-72"
+          style={{ animationDelay: '-4s', animationDuration: '14s' }}
         />
-        <motion.div
-          className="mesh-orb right-[10%] top-1/3 h-72 w-72"
-          animate={{ x: [0, -20, 12, 0], y: [0, 28, -16, 0], scale: [1, 0.9, 1.1, 1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="mesh-orb bottom-20 left-1/3 h-56 w-56"
-          animate={{ x: [0, 18, -10, 0], y: [0, 14, -20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        <div
+          className="mesh-orb bottom-20 left-1/3 h-40 w-40 sm:h-56 sm:w-56"
+          style={{ animationDelay: '-8s', animationDuration: '10s' }}
         />
 
         <div className="relative mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div className="space-y-8">
             <motion.p
               variants={revealItem}
-              className="accent-text inline-flex rounded-full border border-[color:var(--accent-soft-border)] bg-[color:var(--surface)] px-4 py-2 text-xs uppercase tracking-[0.35em]"
+              className="accent-text inline-flex rounded-full border border-[color:var(--accent-soft-border)] bg-[color:var(--surface)] px-3 py-1.5 text-[10px] uppercase tracking-[0.3em] sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.35em]"
             >
               Digital Craft. Built to Last.
             </motion.p>
             <motion.div variants={revealItem} className="space-y-5">
-              <h1 className="max-w-4xl font-heading text-5xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-8xl">
+              <h1 className="max-w-4xl font-heading text-4xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-5xl md:text-6xl lg:text-8xl">
                 Forging Digital Excellence
               </h1>
               <p className="max-w-2xl text-base leading-8 text-[color:var(--muted)] sm:text-lg">
@@ -105,7 +99,7 @@ function Home() {
 
         <a
           href="#home-services"
-          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--muted)]"
+          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--muted)] sm:flex"
         >
           Scroll
           <motion.span
@@ -203,27 +197,27 @@ function Home() {
 
           <motion.div
             variants={revealItem}
-            className="hide-scrollbar flex snap-x gap-5 overflow-x-auto pb-4"
+            className="hide-scrollbar -mx-1 flex snap-x gap-4 overflow-x-auto px-1 pb-4 sm:gap-5"
           >
             {featuredProjects.map((project) => (
               <article
                 key={project.id}
-                className="panel min-w-[19rem] snap-start overflow-hidden rounded-[2rem] sm:min-w-[24rem] lg:min-w-[26rem]"
+                className="panel w-[75vw] min-w-[260px] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[1.5rem] sm:w-auto sm:min-w-[22rem] sm:max-w-none sm:rounded-[2rem] lg:min-w-[26rem]"
               >
                 <img
                   src={project.image}
                   alt={project.title}
                   loading="lazy"
                   decoding="async"
-                  className="h-64 w-full object-cover"
+                  className="h-40 w-full object-cover sm:h-56 lg:h-64"
                 />
-                <div className="space-y-4 p-6">
+                <div className="space-y-3 p-4 sm:space-y-4 sm:p-6">
                   <span className="accent-soft rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em]">
                     {project.categoryLabel}
                   </span>
                   <div>
-                    <h3 className="font-heading text-2xl font-bold">{project.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
+                    <h3 className="font-heading text-lg font-bold sm:text-2xl">{project.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-xs leading-6 text-[color:var(--muted)] sm:mt-3 sm:text-sm sm:leading-7">
                       {project.shortDescription}
                     </p>
                   </div>
@@ -254,19 +248,19 @@ function Home() {
             <div className="grid gap-5 pt-8 lg:pl-8 lg:pt-0">
               <div className="surface-card rounded-[1.5rem] p-5">
                 <p className="accent-text text-xs uppercase tracking-[0.3em]">Email</p>
-                <a href="mailto:thetotalforge@gmail.com" className="mt-3 block font-heading text-2xl font-bold">
+                <a href="mailto:thetotalforge@gmail.com" className="mt-3 block font-heading text-base font-bold break-all sm:text-xl lg:text-2xl">
                   thetotalforge@gmail.com
                 </a>
               </div>
               <div className="surface-card rounded-[1.5rem] p-5">
                 <p className="accent-text text-xs uppercase tracking-[0.3em]">Phone</p>
-                <a href="tel:+13074436649" className="mt-3 block font-heading text-2xl font-bold">
+                <a href="tel:+13074436649" className="mt-3 block font-heading text-base font-bold sm:text-xl lg:text-2xl">
                   +1 307 443 6649
                 </a>
               </div>
               <div className="surface-card rounded-[1.5rem] p-5">
                 <p className="accent-text text-xs uppercase tracking-[0.3em]">Address</p>
-                <p className="mt-3 text-lg text-[color:var(--text)]">30 N Gould St #64478, Sheridan, WY 82801, USA</p>
+                <p className="mt-3 text-sm text-[color:var(--text)] sm:text-lg">30 N Gould St #64478, Sheridan, WY 82801, USA</p>
               </div>
             </div>
           </motion.div>

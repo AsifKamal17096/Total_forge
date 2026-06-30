@@ -12,8 +12,10 @@ function AnimatedCounter({ value, suffix = '', label, prefix = '' }) {
       return undefined
     }
 
-    const duration = 1400
+    const duration = 1000
     let startTime
+
+    const easeOutQuart = (t) => 1 - (1 - t) ** 4
 
     const updateCounter = (timestamp) => {
       if (!startTime) {
@@ -21,7 +23,7 @@ function AnimatedCounter({ value, suffix = '', label, prefix = '' }) {
       }
 
       const progress = Math.min((timestamp - startTime) / duration, 1)
-      setCount(Math.floor(progress * value))
+      setCount(Math.floor(easeOutQuart(progress) * value))
 
       if (progress < 1) {
         window.requestAnimationFrame(updateCounter)

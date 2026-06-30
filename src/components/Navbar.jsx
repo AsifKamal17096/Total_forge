@@ -47,7 +47,7 @@ function Navbar() {
         }}
       >
         <div
-          className={`mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-3 transition-all duration-300 sm:px-5 ${
+          className={`mx-auto flex w-full max-w-7xl min-w-0 items-center justify-between gap-4 rounded-full border px-4 py-3 transition-all duration-300 sm:px-5 ${
             isScrolled
               ? 'border-[color:var(--surface-border)] bg-[color:var(--bg-elevated)] shadow-[var(--shadow)] backdrop-blur-xl'
               : 'border-transparent bg-[color:var(--surface)] backdrop-blur-md'
@@ -80,7 +80,7 @@ function Navbar() {
               type="button"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
               onClick={() => setIsMenuOpen((currentState) => !currentState)}
-              className="rounded-full border border-[color:var(--surface-border)] bg-[color:var(--surface)] p-2"
+              className="rounded-full border border-[color:var(--surface-border)] bg-[color:var(--surface)] p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -95,21 +95,25 @@ function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsMenuOpen(false)}
           >
             <motion.div
-              className="panel w-full max-w-md rounded-[2rem] p-5"
-              initial={{ opacity: 0, y: -20, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.96 }}
+              className="panel w-full max-w-[90vw] rounded-[2rem] p-5"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <NavLink
                     key={item.to}
                     to={item.to}
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
-                      `surface-hover rounded-2xl px-4 py-3 text-base font-medium transition duration-300 ${
+                      `surface-hover rounded-2xl px-4 py-4 text-base font-medium transition duration-300 ${
                         isActive
                           ? 'accent-soft'
                           : 'text-[color:var(--muted)] hover:bg-[color:var(--surface)] hover:text-[color:var(--text)]'

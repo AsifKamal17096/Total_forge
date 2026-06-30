@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
@@ -67,11 +67,7 @@ function AppShell() {
         </AnimatePresence>
       </Suspense>
       <Footer />
-      <motion.div
-        className="forge-glow pointer-events-none"
-        animate={{ opacity: [0.32, 0.58, 0.32], scale: [1, 1.06, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      <div className="forge-glow" />
     </div>
   )
 }

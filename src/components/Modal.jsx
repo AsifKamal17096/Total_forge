@@ -36,22 +36,22 @@ function Modal({ project, onClose }) {
         >
           <motion.article
             className="panel max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-[2rem]"
-            initial={{ opacity: 0, scale: 0.88, y: 40 }}
+            initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 30 }}
-            transition={{ type: 'spring', stiffness: 160, damping: 20 }}
+            exit={{ opacity: 0, scale: 0.96, y: 16 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 24 }}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[color:var(--surface-border)] bg-[color:var(--bg-elevated)] px-6 py-4 backdrop-blur-xl">
+            <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[color:var(--surface-border)] bg-[color:var(--bg-elevated)] px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-4">
               <div>
                 <p className="accent-text text-xs uppercase tracking-[0.35em]">{project.categoryLabel}</p>
-                <h3 className="mt-2 font-heading text-2xl font-bold">{project.title}</h3>
+                <h3 className="mt-2 font-heading text-lg font-bold sm:text-2xl">{project.title}</h3>
               </div>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close project details"
-                className="rounded-full border border-[color:var(--surface-border)] p-2 transition duration-300 hover:scale-105"
+                className="shrink-0 rounded-full border border-[color:var(--surface-border)] p-2 transition duration-300 hover:scale-105 min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -60,7 +60,7 @@ function Modal({ project, onClose }) {
             <img
               src={project.image}
               alt={project.title}
-              className="h-72 w-full object-cover sm:h-96"
+              className="h-48 w-full object-cover sm:h-72 md:h-96"
               loading="lazy"
               decoding="async"
             />
