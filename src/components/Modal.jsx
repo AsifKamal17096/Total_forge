@@ -1,0 +1,99 @@
+import { useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ExternalLink, X } from 'lucide-react'
+
+function Modal({ project, onClose }) {
+  useEffect(() => {
+    if (!project) {
+      return undefined
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleEscape)
+    }
+  }, [onClose, project])
+
+  return (
+    <AnimatePresence>
+      {project ? (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.article
+            className="panel max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-[2rem]"
+            initial={{ opacity: 0, scale: 0.88, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ type: 'spring', stiffness: 160, damping: 20 }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[color:var(--surface-border)] bg-[color:var(--bg-elevated)] px-6 py-4 backdrop-blur-xl">
+              <div>
+                <p className="accent-text text-xs uppercase tracking-[0.35em]">{project.categoryLabel}</p>
+                <h3 className="mt-2 font-heading text-2xl font-bold">{project.title}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close project details"
+                className="rounded-full border border-[color:var(--surface-border)] p-2 transition duration-300 hover:scale-105"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <img
+              src={project.image}
+              alt={project.title}
+              className="h-72 w-full object-cover sm:h-96"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <div className="space-y-6 p-6 sm:p-8">
+              <p className="text-base leading-8 text-[color:var(--muted)]">{project.description}</p>
+
+              <div className="flex flex-wrap gap-3">
+                {project.tech.map((tag) => (
+                  <span
+                    key={tag}
+                    className="surface-card rounded-full px-4 py-2 text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="accent-solid inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-1"
+              >
+                Live Demo
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.article>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  )
+}
+
+export default Modal

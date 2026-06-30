@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --color-carbon: #171717;
+  --color-lime: #c6ff34;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #171717;
+  --bg-elevated: #1d1f1d;
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --surface-border: rgba(255, 255, 255, 0.11);
+  --text: #f5f7fa;
+  --text-strong: #ffffff;
+  --muted: #b4bcc7;
+  --accent: #c6ff34;
+  --accent-fg: #d8ff7a;
+  --accent-soft: rgba(198, 255, 52, 0.12);
+  --accent-soft-strong: rgba(198, 255, 52, 0.18);
+  --accent-soft-border: rgba(198, 255, 52, 0.24);
+  --accent-soft-text: #e5ff9f;
+  --accent-solid: #c6ff34;
+  --accent-solid-text: #171717;
+  --accent-mesh: rgba(169, 214, 45, 0.08);
+  --accent-orb: rgba(198, 255, 52, 0.16);
+  --accent-glow: rgba(198, 255, 52, 0.12);
+  --logo-base: #f5f7fa;
+  --logo-accent: #cfff57;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f8f9fa;
+  --bg-elevated: #ffffff;
+  --surface: rgba(23, 23, 23, 0.036);
+  --surface-strong: rgba(23, 23, 23, 0.06);
+  --surface-border: rgba(23, 23, 23, 0.09);
+  --text: #171717;
+  --text-strong: #0f1110;
+  --muted: #5e6368;
+  --accent: #c6ff34;
+  --accent-fg: #536b14;
+  --accent-soft: rgba(125, 160, 22, 0.1);
+  --accent-soft-strong: rgba(125, 160, 22, 0.16);
+  --accent-soft-border: rgba(95, 121, 17, 0.2);
+  --accent-soft-text: #4b6012;
+  --accent-solid: #c6ff34;
+  --accent-solid-text: #171717;
+  --accent-mesh: rgba(125, 160, 22, 0.06);
+  --accent-orb: rgba(125, 160, 22, 0.12);
+  --accent-glow: rgba(125, 160, 22, 0.08);
+  --logo-base: #171717;
+  --logo-accent: #536b14;
+  --shadow: 0 24px 60px rgba(23, 23, 23, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, var(--accent-mesh), transparent 30%),
+    radial-gradient(circle at bottom right, var(--accent-mesh), transparent 26%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition:
+    background-color 0.45s ease,
+    color 0.45s ease,
+    background 0.45s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: #171717;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.section-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 6rem 1rem;
+}
+
+.panel {
+  border: 1px solid var(--surface-border);
+  background:
+    linear-gradient(180deg, var(--surface-strong), transparent 100%),
+    var(--surface);
+  box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.muted-copy {
+  color: var(--muted);
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--accent-orb) 0%, transparent 72%);
+  filter: blur(42px);
+  animation: float-orb 12s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent);
+}
+
+:root[data-theme='light'] .grid-overlay {
+  background-image:
+    linear-gradient(rgba(23, 23, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 23, 23, 0.05) 1px, transparent 1px);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.forge-glow {
+  position: fixed;
+  left: 50%;
+  bottom: -8rem;
+  width: min(72rem, 88vw);
+  height: 22rem;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 72%);
+  filter: blur(54px);
+  opacity: 0.58;
+  -webkit-mask-image: radial-gradient(circle at center, black 0%, black 55%, transparent 86%);
+  mask-image: radial-gradient(circle at center, black 0%, black 55%, transparent 86%);
+}
+
+:root[data-theme='light'] .forge-glow {
+  opacity: 0.32;
+}
+
+.accent-text {
+  color: var(--accent-fg);
+}
+
+.accent-icon {
+  color: var(--accent-fg);
+}
+
+.accent-soft {
+  border: 1px solid var(--accent-soft-border);
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+}
+
+.accent-solid {
+  border: 1px solid var(--accent-soft-border);
+  background: var(--accent-solid);
+  color: var(--accent-solid-text);
+  box-shadow: 0 14px 32px rgba(198, 255, 52, 0.16);
+}
+
+.accent-link {
+  color: var(--accent-fg);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.accent-link:hover {
+  color: var(--text-strong);
+}
+
+.surface-hover {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.surface-hover:hover {
+  background: var(--surface-strong);
+}
+
+.surface-card {
+  border: 1px solid var(--surface-border);
+  background: var(--surface-strong);
+}
+
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-shell {
+    padding-inline: 1.5rem;
+  }
+
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-inline: 2.5rem;
+    padding-block: 7rem;
+  }
+
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 1.5rem;
+  }
+
+  .masonry-item {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@keyframes float-orb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -24px, 0) scale(1.08);
+  }
+}
